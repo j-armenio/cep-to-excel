@@ -15,8 +15,8 @@ def get_coordinates(cep):
             json_response = response.json()
             
             return {
-                "lat": float(json_response["latitude"]),
-                "lng": float(json_response["longitude"]),
+                "latitude": float(json_response["latitude"]),
+                "longitude": float(json_response["longitude"]),
             }
         
         elif response.status_code == 400:
