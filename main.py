@@ -1,5 +1,4 @@
 from libs import df_func
-from libs import GUI
 
 TEST_COORDS_FILE = "tests/relative_wealth_index_copia.csv"
 TEST_CEP_FILE = "tests/modelo_busca_copia.xlsx"
@@ -17,8 +16,6 @@ except FileNotFoundError:
     print("Arquivo não encontrado")
     exit()
 
-# df_func.complete_df_with_rwi(coords_df, cep_df)
-
-GUI.myGUI().run()
+df_func.complete_df_with_rwi(coords_df, cep_df)
 
 print("foi")

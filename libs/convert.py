@@ -1,6 +1,4 @@
 import requests
-import json
-from geopy.distance import geodesic
 
 URL_GET_ADDRESS_FROM_CEP = "https://www.cepaberto.com/api/v3/cep?cep={}"
 CEP_TEST = "81670040"
