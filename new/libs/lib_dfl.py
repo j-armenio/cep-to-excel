@@ -1,7 +1,7 @@
 import pandas as pd
 
-import libs.lib_coord as lib_coord
-import libs.lib_aux as aux
+import libs.lib_api as lib_api
+import libs.lib_coords as aux
 
 OUTPUT_FILE = "out.xlsx"
 BIRTHDAY_TAG = "DATA DE NASCIMENTO  "
@@ -34,17 +34,19 @@ def copy_rwi_to_cep_df(coords_df, cep_df):
         print(j)
         
         # Pega a coordenada do cep atual
-        coords = lib_coord.get_coordinates(cep) 
+        coords = lib_api.get_coordinates(cep)
+        print(cep + " - " + str(coords["latitude"]) + "," + str(coords["longitude"]))
 
-        # data contem rwi e error do cep atual 
+        # data contem rwi e error do cep atual
         data = aux.find_closest_data(coords, coords_df)
-
-        # # inserir rwi e error na cep_df nas colunas RWI e ERROR
+        print(str(data["rwi"]), str(data["error"]))
+        
         # # inserir um "-" depois do 5º digito do cep, antes do 6º
-        # cep_format = cep[:5] + "-" + cep[5:]
+        cep_format = cep[:5] + "-" + cep[5:]
 
-        # cep_df.loc[cep_df["CEP"] == cep_format, "RWI"] = data["rwi"]
-        # cep_df.loc[cep_df["CEP"] == cep_format, "ERROR"] = data["error"]
+        # inserir rwi e error na cep_df nas colunas RWI e ERROR
+        cep_df.loc[cep_df["CEP"] == cep_format, "RWI"] = data["rwi"]
+        cep_df.loc[cep_df["CEP"] == cep_format, "ERROR"] = data["error"]
 
-        if j == 10:
+        if j == 5:
             break

@@ -108,7 +108,7 @@ def complete_df_with_rwi(coords_df, cep_df):
         cep_df.loc[cep_df["CEP"] == cep_format, "RWI"] = data["rwi"]
         cep_df.loc[cep_df["CEP"] == cep_format, "ERROR"] = data["error"]
 
-        if j == 10:
+        if j == 4:
             break
 
     fix_excel_dates(cep_df)

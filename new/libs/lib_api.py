@@ -3,6 +3,8 @@ import requests
 URL_GET_ADDRESS_FROM_CEP = "https://www.cepaberto.com/api/v3/cep?cep={}"
 CEP_TEST = "81670040"
 
+# Função que retorna as coordenadas de um CEP
+# *** ERRO DE ATÉ 30 KM (erro máximo achado até agora) ***
 def get_coordinates(cep):
     try:
         url = URL_GET_ADDRESS_FROM_CEP.format(cep)
