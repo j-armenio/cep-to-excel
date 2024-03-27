@@ -26,7 +26,7 @@ def find_closest_data(coords, coords_df):
                 rwi = coords_df["rwi"][i]
                 error = coords_df["error"][i]
                 
-    print("min_distance: ", min_distance)
+    # print("min_distance: ", min_distance)
 
     return {
         "rwi": rwi,
