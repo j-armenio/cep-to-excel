@@ -8,6 +8,11 @@ TX_DATE_LABEL = "Data de tx"
 DEATH_DATE_LABEL = "DATA_ÓBITO"
 HEADER_COLOR = "#EEECE1"
 
+def test():
+    response = lib_api.get_coordinates("86802540")
+    print(response)
+
+
 # Lê o arquivo csv ou excel e retorna um dataframe com os dados
 def read_file(file_name):
     if file_name.endswith(".csv"):
@@ -35,11 +40,18 @@ def copy_rwi_to_cep_df(coords_df, cep_df):
         coords = lib_api.get_coordinates(cep)
         # print(cep + " - " + str(coords["latitude"]) + "," + str(coords["longitude"]))
 
+        # Caso a API não encontre o CEP, inseri -1 no RWI e ERROR
+        if (coords == None):
+            cep_format = cep[:5] + "-" + cep[5:]
+            cep_df.loc[cep_df["CEP"] == cep_format, "RWI"] = -1
+            cep_df.loc[cep_df["CEP"] == cep_format, "ERROR"] = -1
+            continue
+
         # data contem rwi e error do cep atual
         data = aux.find_closest_data(coords, coords_df)
         # print(str(data["rwi"]), str(data["error"]))
         
-        # # inserir um "-" depois do 5º digito do cep, antes do 6º
+        # inserir um "-" depois do 5º digito do cep, antes do 6º
         cep_format = cep[:5] + "-" + cep[5:]
 
         # inserir rwi e error na cep_df nas colunas RWI e ERROR

@@ -12,8 +12,11 @@ def get_coordinates(cep):
         response = requests.get(url, headers=headers)
 
         if response.status_code == 200:
-            json_response = response.json()
+            json_response = response.json()            
             
+            if (json_response == {}):
+                print("CEP inválido")
+                return None
             return {
                 "latitude": float(json_response["latitude"]),
                 "longitude": float(json_response["longitude"]),
